@@ -1,0 +1,13 @@
+const XMLHttpRequest = require('xhr2')
+var s = new XMLHttpRequest();
+s.open("GET","https://restcountries.com/v3.1/all", true)
+s.onload = function () {
+    var countries = JSON.parse(s.responseText);
+    var filteredCountries = countries.filter(country => {
+        return country.population < 200000;
+    });
+    filteredCountries.forEach((country) => {
+        console.log(country.name.common + ": " + country.flag);
+    });
+};
+ s.send();
