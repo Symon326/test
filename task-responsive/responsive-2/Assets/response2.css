@@ -1,0 +1,32 @@
+
+.container{
+    width:max-content;
+    height: 820px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+
+}
+.card{
+    position: relative;
+    width:450px !important;
+    height:auto !important;
+    top: 30px;
+    box-shadow: 0 0.1px 2px black, 0 -0.1px 2px black,  0.1px 0px 2px black, -0.1px 0px 2px black;
+}
+@media(max-width:800px) {
+    .card{
+        position: relative;
+        width:450px !important;
+        height:max-content !important;
+        top: 130px;
+}
+}
+@media(max-width:400px) {
+    .card{
+        position: relative;
+        width:450px !important;
+        height:max-content !important;
+        top: 130px;
+}
+}
