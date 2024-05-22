@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Submission</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+ 
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-body">
+        <h1 id="title">Form Submission</h1>
+        <p id="description">
+          This is a form submission task where you need to create a form with specified fields and a table to display submitted values. On submission of the form, the values should be appended to the table. After updating the record in the table, the form fields should be cleared.
+        </p>
+        <form id="form">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="first-name">First Name</label>
+              <input type="text" class="form-control" id="first-name" placeholder="Enter your first name" required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="last-name">Last Name</label>
+              <input type="text" class="form-control" id="last-name" placeholder="Enter your last name" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea class="form-control" id="address" placeholder="Enter your address" required></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="pincode">Pincode</label>
+              <input type="text" class="form-control" id="pincode" placeholder="Enter your pincode" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Gender</label><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+                <label class="form-check-label" for="male">Male</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
+                <label class="form-check-label" for="female">Female</label>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Pincode</th>
+          <th>Gender</th>
+          
+          
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+      </tbody>
+    </table>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="https://app.zenclass.in/sheets/v1/js/zen/suite/bundle.js"></script>
+</body>
+</html>
