@@ -1,0 +1,37 @@
+.App{
+  position: relative;
+  height: 750px;
+  background-image: linear-gradient(to left, rgb(145, 191, 231), rgb(31, 42, 244));
+}
+.container {
+  width: 700px;
+  display: grid;
+  position: relative;
+  top: 100px;
+  grid-template-columns: 1fr 1fr; 
+}
+
+.products, .cart {
+  height: 400px;
+  width: 300px;
+  padding-left:8px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-image: linear-gradient(to left, rgb(224, 245, 235), rgb(216, 218, 250));
+}
+button{
+  padding:6px;
+  border-radius:6px;
+  border: solid 1px white ;
+  background-color: rgb(164, 238, 145);
+}
+button:hover{
+  background-color: blue;
+  color: whitesmoke;
+}
+h1{
+  text-align: center;
+}
+p{
+  font-size:1.2rem;
+}
