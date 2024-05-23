@@ -1,64 +1,34 @@
-console.log("Event Fired");
-var keys = document.querySelectorAll('#calculator span');
-var operators = ['+', '-', 'x', '÷'];
-var decimalAdded = false;
+// script.js
 
-for(var i = 0; i < keys.length; i++) {
-	keys[i].onclick = function(e) {		var input = document.querySelector('.screen');
-		var inputVal = input.innerHTML;
-		var btnVal = this.innerHTML;
-		
-		
-		if(btnVal == 'C') {
-			input.innerHTML = '';
-			decimalAdded = false;
-		}
-		
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all button elements
+    const buttons = document.querySelectorAll('button');
 
-		else if(btnVal == '=') {
-			var equation = inputVal;
-			var lastChar = equation[equation.length - 1];
-			
-			equation = equation.replace(/x/g, '*').replace(/÷/g, '/');
-			
-			if(operators.indexOf(lastChar) > -1 || lastChar == '.')
-				equation = equation.replace(/.$/, '');
-			
-			if(equation)
-				input.innerHTML = eval(equation);
-				
-			decimalAdded = false;
-		}
-		
-		else if(operators.indexOf(btnVal) > -1) {
-			var lastChar = inputVal[inputVal.length - 1];
-			
-	
-			if(inputVal != '' && operators.indexOf(lastChar) == -1) 
-				input.innerHTML += btnVal;
-			
-
-			else if(inputVal == '' && btnVal == '-') 
-				input.innerHTML += btnVal;
-			
-			if(operators.indexOf(lastChar) > -1 && inputVal.length > 1) {
-				input.innerHTML = inputVal.replace(/.$/, btnVal);
-			}
-			
-			decimalAdded =false;
-		}
-				else if(btnVal == '.') {
-			if(!decimalAdded) {
-				input.innerHTML += btnVal;
-				decimalAdded = true;
-			}
-		}
-		
-
-		else {
-			input.innerHTML += btnVal;
-		}
-	
-		e.preventDefault();
-	}; 
-}
+    // Add event listeners to all buttons
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Clear the result if the clear button is clicked
+            if (this.id === 'clear') {
+                document.getElementById('result').value = '';
+            }
+            // Perform addition if the add button is clicked
+            else if (this.id === 'add') {
+                document.getElementById('result').value += '+';
+            }
+            // Perform subtraction if the subtract button is clicked
+            else if (this.id === 'subtract') {
+                document.getElementById('result').value += '-';
+            }
+            // Calculate the result if the equal button is clicked
+            else if (this.id === 'equal') {
+                const expression = document.getElementById('result').value;
+                const result = eval(expression); // Evaluate the expression
+                document.getElementById('result').value = result;
+            }
+            // Append the clicked button's value to the result
+            else {
+                document.getElementById('result').value += this.textContent;
+            }
+        });
+    });
+});
