@@ -1,0 +1,48 @@
+/* App.css */
+.app {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.product-list {
+  width: 70%;
+}
+
+.cart {
+  width: 30%;
+  background-color: #f9f9f9;
+  padding: 20px;
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  box-shadow:.6px 0px 1px black ;
+}
+
+.product-image {
+  width: 100px;
+  height: 200px;
+  margin-right: 20px;
+}
+
+.cart-item {
+  margin-bottom: 10px;
+}
+
+.cart-summary {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+.Addbtn{
+  background-color: rgba(26, 8, 226, 0.73);
+  position: relative;
+  bottom: 5px;
+}
+.rembtn{
+  background-color: rgb(199, 48, 48);
+  color: aliceblue;
+}
