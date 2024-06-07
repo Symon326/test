@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import'./App.css'
+import './App.css';
 
 function Product({ product, addToCart, removeFromCart }) {
   const [inCart, setInCart] = useState(false);
@@ -16,35 +16,22 @@ function Product({ product, addToCart, removeFromCart }) {
 
   return (
     <div className="product">
+      <img src={product.imageUrl} alt={product.name} />
       <p>{product.name}</p>
+      <p>Rs.{product.price}</p>
       <button onClick={handleClick}>{inCart ? 'Remove from Cart' : 'Add to Cart'}</button>
     </div>
   );
 }
 
-function CartItem({ item }) {
-  return (
-    <li key={item.id}>
-      {item.product} ==  Rs.{item.price} (Quantity: {item.quantity})
-    </li>
-  );
-}
-
 function Cart({ cartItems }) {
+  const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <div className="cart">
       <h2>Cart</h2>
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <ul>
-          {cartItems.map((item) => (
-            <CartItem key={item.id} item={item} />
-          ))}
-        </ul>
-      )}
+      <p>Total Quantity: {totalQuantity}</p>
       <p>Total: Rs.{total}</p>
     </div>
   );
@@ -52,26 +39,39 @@ function Cart({ cartItems }) {
 
 function App() {
   const [products, setProducts] = useState([
-    { id: 1, name: 'T-Shirt', price: 200 },
-    { id: 2, name: 'Hat', price: 150 },
-    { id: 3, name: 'Jeans', price: 700 },
+    { id: 1, name: 'T-Shirt', price: 200, imageUrl: 'src/assets/images/t.avif' },
+    { id: 2, name: 'Hat', price: 150, imageUrl: 'src/assets/images/h.avif' },
+    { id: 3, name: 'Jeans', price: 700, imageUrl: 'src/assets/images/j.jpg' },
   ]);
 
   const [cartItems, setCartItems] = useState([]);
-  //adding items ti cart
+
   const addToCart = (productId) => {
+    const product = products.find((p) => p.id === productId);
     const newCartItems = [...cartItems];
     const existingItem = newCartItems.find((item) => item.id === productId);
+
     if (existingItem) {
-      existingItem.quantity = existingItem.quantity + 1;
+      existingItem.quantity += 1;
     } else {
-      newCartItems.push({ id: productId, quantity: 1, price: products.find((p) => p.id === productId).price });
+      newCartItems.push({ id: productId, price: product.price, quantity: 1 });
     }
+
     setCartItems(newCartItems);
   };
- //remove items
+
   const removeFromCart = (productId) => {
-    const newCartItems = cartItems.filter((item) => item.id !== productId);
+    let newCartItems = [...cartItems];
+    const existingItem = newCartItems.find((item) => item.id === productId);
+
+    if (existingItem) {
+      if (existingItem.quantity > 1) {
+        existingItem.quantity -= 1;
+      } else {
+        newCartItems = newCartItems.filter((item) => item.id !== productId);
+      }
+    }
+
     setCartItems(newCartItems);
   };
 
@@ -79,14 +79,12 @@ function App() {
     <div className="App">
       <h1>Shopping Cart</h1>
       <div className="container">
-        <div className="products"> {/*product*/}
+        <div className="products">
           {products.map((product) => (
             <Product key={product.id} product={product} addToCart={addToCart} removeFromCart={removeFromCart} />
           ))}
         </div>
-        <div className="cart"> {/* Cart section */}
-          <Cart cartItems={cartItems} />
-        </div>
+        <Cart cartItems={cartItems} />
       </div>
     </div>
   );
