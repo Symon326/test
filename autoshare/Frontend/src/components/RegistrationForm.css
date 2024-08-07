@@ -1,0 +1,28 @@
+
+
+h1{
+  font-size:2em;
+   color: aliceblue;
+}
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height:100vh;
+    background-image:url("../assets/car-car-park.jpg");
+    background-size: cover;
+    box-sizing: border-box; 
+    overflow-y: hidden;
+  }
+  
+  .form-container {
+    background-color: rgba(58, 50, 50, 0.255);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px; 
+    box-sizing: border-box; 
+  }
+  
