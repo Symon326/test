@@ -1,57 +1,95 @@
-import React from "react";
-import { Formik, Form, Field } from "formik";
-import { Button, TextField, CircularProgress } from "@material-ui/core";
-import axios from "axios";
+import React, { useContext, useState } from "react";
+import { AuthContext } from '../context/AuthContext';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { Button, TextField, CircularProgress, IconButton, InputAdornment, Alert } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from "react-router-dom";
-import "./LoginForm.css";
-import { green } from "@material-ui/core/colors";
+import axios from "axios";
+import "./css/LoginForm.css";
 
 const LoginForm = () => {
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Required")
+  });
 
   return (
     <div className="login-form">
-      <h1>Login Form</h1>
       <div className="form-container">
+        <h1>Login Form</h1>
         <Formik
           initialValues={{ email: "", password: "" }}
+          validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting }) => {
             try {
-              const response = await axios.post(
-                "http://localhost:5000/api/auth/login",
-                values
-              );
-              const { token } = response.data;
-              // Handle successful login (e.g., save token, redirect)
-              console.log("Login successful, token:", token);
+              await login(values);
+              setSuccess('Login successful');
+              setTimeout(() => navigate('/cars'), 1000);  // Redirect after success
             } catch (err) {
-              console.error(err);
+              setError('Login failed: ' + (err.response ? err.response.data.error : err.message));
             }
             setSubmitting(false);
           }}
         >
           {({ isSubmitting }) => (
             <Form>
-              <Field
-                name="email"
-                as={TextField}
-                label="Email"
-                fullWidth
-                margin="normal"
-              />
-              <Field
-                name="password"
-                as={TextField}
-                type="password"
-                label="Password"
-                fullWidth
-                margin="normal"
-              />
+              {error && <Alert severity="error">{error}</Alert>}
+              {success && <Alert severity="success">{success}</Alert>}
+              <div>
+                <Field
+                  name="email"
+                  as={TextField}
+                  label="Email"
+                  fullWidth
+                  margin="normal"
+                  autoComplete="off" // Hide autocomplete suggestions
+                  helperText={<ErrorMessage name="email" />}
+                  error={!!(<ErrorMessage name="email" />)}
+                />
+              </div>
+              <div>
+                <Field
+                  name="password"
+                  as={TextField}
+                  type={showPassword ? "text" : "password"}
+                  label="Password"
+                  fullWidth
+                  margin="normal"
+                  helperText={<ErrorMessage name="password" />}
+                  error={!!(<ErrorMessage name="password" />)}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </div>
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 variant="contained"
-                startIcon={isSubmitting && <CircularProgress size={24} style={{color: "#ff5733"}}/>}
+                startIcon={isSubmitting && <CircularProgress size={24} style={{ color: "#ff5733" }} />}
                 color="secondary"
                 fullWidth
                 style={{ position: "relative" }}
@@ -59,9 +97,9 @@ const LoginForm = () => {
                 Login
               </Button>
               <Button
-                onClick={() => navigate("/register")} // Updated navigation
+                onClick={() => navigate("/register")}
                 variant="outlined"
-                color="secondary"
+                color="primary"
                 fullWidth
                 style={{ marginTop: "8px" }}
               >
