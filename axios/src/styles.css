@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .layout {
+    min-height: 100vh;
+  }
+  
+  .site-layout-content {
+    background: #fff;
+    padding: 24px;
+    margin: 24px 0;
+    border-radius: 4px;
+  }
+  
+  .ant-btn-danger {
+    background: #ff4d4f;
+    border-color: #ff4d4f;
+  }
