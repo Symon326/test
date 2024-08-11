@@ -54,7 +54,7 @@ const BookingPage = () => {
               <Typography variant="h6" className="text-center"  style={{color:"Gold"}}>{carModel}</Typography>
               <Box className="row booking-details">
                 <Box className="col-md-6 booking-left">
-                  <img src={`http://localhost:4000/${image}`} alt={carModel} className="car-image img-fluid rounded" />
+                  <img src={`https://test-7-l727.onrender.com/${image}`} alt={carModel} className="car-image img-fluid rounded" />
                 </Box>
                 <Box className="col-md-6 booking-right" style={{color:"white"}}>
                   <DateTimePicker
@@ -76,7 +76,7 @@ const BookingPage = () => {
                   {totalHours > 0 && (
             <Box className="total-details mt-3 text-center">
               <Typography variant="h6" style={{color:"white"}}>Total Hours: {totalHours}</Typography>
-              <Typography variant="h6"  style={{color:"white"}}>Total Price: ${totalPrice.toFixed(2)}</Typography>
+              <Typography variant="h6"  style={{color:"white"}}>Total Price: ₹{totalPrice.toFixed(2)}</Typography>
               <Button variant="contained" color="primary" onClick={handleProceedToPay}>
                 Proceed to Pay
               </Button>

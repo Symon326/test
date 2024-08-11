@@ -35,7 +35,7 @@ const CarCard = ({ car }) => {
       <CardMedia
         component="img"
         className="card-image"
-        image={`http://localhost:4000/${car.image}`}
+        image={`https://test-7-l727.onrender.com/${car.image}`}
         alt={car.carModel}
       />
       <CardContent className="card-content">

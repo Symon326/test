@@ -43,7 +43,7 @@ const ReviewPage = () => {
       };
 
       const response = await axios.post(
-        'http://localhost:4000/api/reviews',
+        'https://test-7-l727.onrender.com/api/reviews',
         { userId, carId, rating, review },
         config
       );
@@ -64,7 +64,7 @@ const ReviewPage = () => {
         <Typography variant="h6" style={{ color: "Gold", textAlign: "center" }}>{carModel}</Typography>
 
           <img 
-            src={`http://localhost:4000/${image}`} 
+            src={`https://test-7-l727.onrender.com/${image}`} 
             alt={carModel} 
             style={{ 
               width: '100%', 

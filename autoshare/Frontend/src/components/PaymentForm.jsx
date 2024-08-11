@@ -7,7 +7,7 @@ const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const location = useLocation();
-  const { totalPrice } = location.state || {}; // Get the amount from state
+  const { totalPrice } = location.state || {}; 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,25 +23,25 @@ const PaymentForm = () => {
       justifyContent="center" 
       alignItems="center" 
       minHeight="100vh" 
-      bgcolor="#f0f0f0" // Optional: background color for the container
-      padding={2} // Optional: add padding around the container
+      bgcolor="#f0f0f0" 
+      padding={2} 
     >
       <Box 
         component="form" 
         onSubmit={handleSubmit} 
         width="100%" 
-        maxWidth="500px" // Limit the width of the form
+        maxWidth="500px" 
         border="1px solid #ccc" 
         padding="20px" 
         borderRadius="8px"
-        bgcolor="#fff" // Optional: background color for the form
-        boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)" // Optional: add shadow for better visibility
+        bgcolor="#fff" 
+        boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)" 
       >
         <Typography variant="h6" gutterBottom>
           Payment
         </Typography>
         <Typography variant="h6" gutterBottom>
-          Amount: ${totalPrice ? totalPrice.toFixed(2) : '0.00'}
+          Amount: ₹{totalPrice ? totalPrice.toFixed(2) : '0.00'}
         </Typography>
         <Box 
           marginBottom="20px" 
@@ -56,7 +56,7 @@ const PaymentForm = () => {
           variant="contained" 
           color="primary" 
           disabled={!stripe}
-          fullWidth // Optional: make the button full width
+          fullWidth 
         >
           Pay
         </Button>

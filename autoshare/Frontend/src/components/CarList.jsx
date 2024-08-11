@@ -26,7 +26,7 @@ const CarList = () => {
 
     const fetchCars = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/cars');
+        const response = await axios.get('https://test-7-l727.onrender.com/api/cars');
         setCars(response.data);
         setLoading(false);
       } catch (error) {
@@ -75,7 +75,7 @@ const CarList = () => {
         <Box mb={2}>
           <TextField
             select
-            label="Filter by Car Model"
+            label="Filter by Car Type"
             value={filterModel}
             onChange={(event) => setFilterModel(event.target.value)}
             fullWidth

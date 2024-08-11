@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (values) => {
     try {
-      const response = await axios.post('http://localhost:4000/api/auth/login', values);
+      const response = await axios.post('https://test-7-l727.onrender.com/api/auth/login', values);
       const { token, userId } = response.data; // Ensure response includes userId
 
       console.log("Login Response:", response.data); // Log the response

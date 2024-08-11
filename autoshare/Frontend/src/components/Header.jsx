@@ -15,15 +15,15 @@ const Header = () => {
 
   return (
     <AppBar
-      position="absolute" // Make sure header is positioned absolutely
+      position="absolute" 
       className="header"
       elevation={0}
       style={{
         backgroundColor: 'transparent',
-        top: 0, // Ensure it sticks to the top
+        top: 0, 
         left: 0,
-        width: '100%', // Full width
-        zIndex: 1300, // Ensure it is above other content
+        width: '100%', 
+        zIndex: 1300, 
       }}
     >
       <Toolbar style={{ display: 'flex', justifyContent: 'center', textAlign: 'center' }}>

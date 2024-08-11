@@ -36,11 +36,11 @@ function RegistrationForm() {
           onSubmit={async (values, { setSubmitting }) => {
             try {
               await axios.post(
-                "http://localhost:4000/api/auth/register",
+                "https://test-7-l727.onrender.com/api/auth/register",
                 values
               );
               setSuccess('Registration successful');
-              setTimeout(() => navigate("/login"), 1000);  // Redirect after success
+              setTimeout(() => navigate("/login"), 1000); 
             } catch (err) {
               setError('Registration failed: ' + (err.response ? err.response.data.error : err.message));
             }

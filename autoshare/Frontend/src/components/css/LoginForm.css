@@ -7,6 +7,7 @@
   background-image: url("../../assets/6867609_28804.jpg");
   background-size: cover;
   background-position: center;
+  overflow-y: hidden;
 }
 
 .form-container {
