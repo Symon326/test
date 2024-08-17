@@ -1,0 +1,17 @@
+.card-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-title, .card-text:not(.price-text) {
+    margin-bottom: auto; /* Pushes these elements upwards */
+  }
+  
+  .price-text {
+    margin-bottom: 10px; /* Ensures the price is just above the button */
+  }
+  
+  .btn-primary {
+    margin-top: auto; /* Pushes the button to the bottom */
+  }
+  
