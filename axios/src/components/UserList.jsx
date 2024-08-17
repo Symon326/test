@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { getUsers, deleteUser } from '../../api';
 import { Table, Button, Space, Popconfirm, message } from 'antd';
 
 const UserList = ({ onEdit, refresh }) => {
