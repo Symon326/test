@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmojiHub API</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: #f8f9fa;
+        }
+        .container {
+            padding-top: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .emoji-display {
+            font-size: 4rem; /* Increase font size to make emoji large */
+            text-align: center;
+            margin: 20px 0;
+        }
+        .card-body {
+            text-align: center;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+        }
+        .header-title {
+            font-size: 2rem; /* Medium title size */
+            font-weight: 500; /* Medium font weight */
+            text-align: center;
+            margin-top: 100%; /* Adjust spacing for visibility */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header-title">EmojiHub Emojis</h1>
+        <div id="emojiCards" class="row">
+            <!-- Cards will be inserted here -->
+        </div>
+        <div id="error-message" class="error-message"></div>
+    </div>
+
+    <script>
+        const API_URL = 'https://emojihub.yurace.pro/api/all';
+
+        // Function to fetch emoji data from the API
+        function fetchEmojis() {
+            return fetch(API_URL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .catch(error => {
+                    console.error('Error fetching emoji data:', error);
+                    document.querySelector('#error-message').innerText = 'Failed to load emoji data. Please try again later.';
+                    return []; // Return an empty array if there is an error
+                });
+        }
+
+        // Function to create a card element for each emoji
+        function createCard(emojiData) {
+            const emoji = emojiData.htmlCode[0];
+            return `
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="emoji-display">${emoji}</div>
+                            <h5 class="card-title">${emojiData.name}</h5>
+                            <p class="card-text"><strong>Category:</strong> ${emojiData.category}</p>
+                            <p class="card-text"><strong>Group:</strong> ${emojiData.group}</p>
+                            <p class="card-text"><strong>Emoji:</strong> <span class="emoji">${emoji}</span></p>
+                            <p class="card-text"><strong>Unicode:</strong> ${emojiData.unicode.join(', ')}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to render the cards on the page
+        function renderCards(emojis) {
+            const emojiCardsContainer = document.querySelector('#emojiCards');
+            emojiCardsContainer.innerHTML = emojis.map(createCard).join('');
+        }
+
+        // Initial call to fetch and display emojis
+        fetchEmojis().then(emojis => renderCards(emojis));
+    </script>
+</body>
+</html>

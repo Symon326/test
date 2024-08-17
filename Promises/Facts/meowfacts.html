@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meow Facts</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: #f8f9fa;
+        }
+        .container {
+            text-align: center;
+        }
+        .fact-text {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+        .cat-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .btn-custom {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="display-4">Meow Facts</h1>
+        <img src="assets/funny-cat-3840x2160-funny-cat-25561.jpg" alt="Random Cat" class="cat-image">
+        <p id="fact" class="fact-text">Loading...</p>
+        <button id="nextFact" class="btn btn-primary btn-custom">Next</button>
+    </div>
+
+    <script>
+        const API_URL = 'https://meowfacts.herokuapp.com/';
+
+        // Fetch a cat fact from the API
+        function fetchCatFact() {
+            return fetch(API_URL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => data.data[0])
+                .catch(error => console.error('Error fetching cat fact:', error));
+        }
+
+        // Update the cat fact on the page
+        function updateFact() {
+            fetchCatFact().then(fact => {
+                document.querySelector('#fact').innerText = fact;
+            });
+        }
+
+        // Set up event listener for the "Next" button
+        document.querySelector('#nextFact').addEventListener('click', updateFact);
+
+        // Initial call to populate the fact on page load
+        updateFact();
+    </script>
+</body>
+</html>

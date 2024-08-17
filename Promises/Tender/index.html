@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Information</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: #f8f9fa;
+        }
+        h1{
+            margin-top: 20%;
+        }
+        .header {
+            margin-bottom: 20px; /* Space between header and card */
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 1.5rem; /* Adjust for responsiveness */
+        }
+        .card-body p {
+            font-size: 1rem; /* Adjust for responsiveness */
+        }
+        .card-body .value {
+            color: blue; /* Blue color for values */
+        }
+        @media (max-width: 576px) {
+            .card-title {
+                font-size: 1.25rem;
+            }
+            .card-body p {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>IP Information</h1>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Details</h5>
+                <p><strong>IP:</strong> <span id="ip" class="value"></span></p>
+                <p><strong>Network:</strong> <span id="network" class="value"></span></p>
+                <p><strong>Version:</strong> <span id="version" class="value"></span></p>
+                <p><strong>City:</strong> <span id="city" class="value"></span></p>
+                <p><strong>Region:</strong> <span id="region" class="value"></span></p>
+                <p><strong>Country:</strong> <span id="country" class="value"></span> (<span id="country_code" class="value"></span>)</p>
+                <p><strong>Capital:</strong> <span id="country_capital" class="value"></span></p>
+                <p><strong>Continent:</strong> <span id="continent_code" class="value"></span></p>
+                <p><strong>Postal Code:</strong> <span id="postal" class="value"></span></p>
+                <p><strong>Latitude:</strong> <span id="latitude" class="value"></span></p>
+                <p><strong>Longitude:</strong> <span id="longitude" class="value"></span></p>
+                <p><strong>Timezone:</strong> <span id="timezone" class="value"></span></p>
+                <p><strong>Currency:</strong> <span id="currency" class="value"></span> (<span id="currency_name" class="value"></span>)</p>
+                <p><strong>Languages:</strong> <span id="languages" class="value"></span></p>
+                <p><strong>Country Area:</strong> <span id="country_area" class="value"></span> sq km</p>
+                <p><strong>Country Population:</strong> <span id="country_population" class="value"></span></p>
+                <p><strong>ASN:</strong> <span id="asn" class="value"></span></p>
+                <p><strong>Organization:</strong> <span id="org" class="value"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://ipapi.co/json';
+
+        // Function to fetch IP information from the API
+        function fetchIPInfo() {
+            return fetch(API_URL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .catch(error => {
+                    console.error('Error fetching IP data:', error);
+                    document.querySelector('.card-body').innerHTML = '<p class="text-danger">Failed to load IP information. Please try again later.</p>';
+                });
+        }
+
+        // Function to display the IP information on the card
+        function displayIPInfo(data) {
+            document.querySelector('#ip').textContent = data.ip;
+            document.querySelector('#network').textContent = data.network;
+            document.querySelector('#version').textContent = data.version;
+            document.querySelector('#city').textContent = data.city;
+            document.querySelector('#region').textContent = data.region;
+            document.querySelector('#country').textContent = data.country_name;
+            document.querySelector('#country_code').textContent = data.country_code;
+            document.querySelector('#country_capital').textContent = data.country_capital;
+            document.querySelector('#continent_code').textContent = data.continent_code;
+            document.querySelector('#postal').textContent = data.postal;
+            document.querySelector('#latitude').textContent = data.latitude;
+            document.querySelector('#longitude').textContent = data.longitude;
+            document.querySelector('#timezone').textContent = data.timezone;
+            document.querySelector('#currency').textContent = data.currency;
+            document.querySelector('#currency_name').textContent = data.currency_name;
+            document.querySelector('#languages').textContent = data.languages;
+            document.querySelector('#country_area').textContent = data.country_area;
+            document.querySelector('#country_population').textContent = data.country_population;
+            document.querySelector('#asn').textContent = data.asn;
+            document.querySelector('#org').textContent = data.org;
+        }
+
+        // Initial call to fetch and display IP information
+        fetchIPInfo().then(displayIPInfo);
+    </script>
+</body>
+</html>
