@@ -60,7 +60,7 @@ router.post('/forgot-password', async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         // Create a reset link
-        const resetLink = `https://66c074b5832d573d80f489cb--aesthetic-travesseiro-9757a1.netlify.app/reset-password/${token}`;
+        const resetLink = `https://66c070e7f1bcf741020d5f7e--bucolic-sherbet-e13739.netlify.app/reset-password/${token}`;
 
         // Send email with the reset link
         const transporter = nodemailer.createTransport({
