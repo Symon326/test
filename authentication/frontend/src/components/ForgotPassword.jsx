@@ -19,7 +19,7 @@ const ForgotPassword = () => {
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
             <div className="card p-4" style={{ maxWidth: '400px', width: '100%' }}>
-                <h2 className="text-center mb-4">Forgot Password</h2>
+                <h2 className="text-center mb-4">Forgo Password</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group mb-3">
                         <label>Email</label>
