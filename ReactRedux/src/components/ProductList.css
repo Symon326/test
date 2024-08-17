@@ -1,17 +1,28 @@
 .card-body {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .card-title, .card-text:not(.price-text) {
-    margin-bottom: auto; /* Pushes these elements upwards */
-  }
-  
-  .price-text {
-    margin-bottom: 10px; /* Ensures the price is just above the button */
-  }
-  
-  .btn-primary {
-    margin-top: auto; /* Pushes the button to the bottom */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  margin-bottom: 15px; /* Space between title and description */
+}
+
+.card-text.description {
+  margin-bottom: 15px; /* Space between description and price section */
+}
+
+.price-and-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Vertically centers the price and button */
+}
+
+.card-text.price-text {
+  margin-right: 10px; /* Space between price and button */
+}
+
+.product-image {
+  height: 200px; /* Set a fixed height for images */
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+}

@@ -13,13 +13,17 @@ const ProductList = () => {
         <div key={item.id} className="col-md-4 mb-4">
           <div className="card h-100">
             <img src={item.thumbnail} alt={item.title} className="card-img-top product-image" />
-            <div className="card-body d-flex flex-column">
-              <h5 className="card-title">{item.title}</h5>
-              <p className="card-text">{item.description}</p>
-              <p className="card-text price-text">Rs.{item.price}</p>
-              <button className="btn btn-primary mt-auto" onClick={() => dispatch(addToCart(item))}>
-                Add to Cart
-              </button>
+            <div className="card-body d-flex flex-column justify-content-between">
+              <div>
+                <h5 className="card-title">{item.title}</h5>
+                <p className="card-text description">{item.description}</p>
+              </div>
+              <div>
+                <p className="card-text price-text mt-3">Rs.{item.price}</p>
+                <button className="btn btn-primary mt-auto" onClick={() => dispatch(addToCart(item))}>
+                  Add to Cart
+                </button>
+              </div>
             </div>
           </div>
         </div>
