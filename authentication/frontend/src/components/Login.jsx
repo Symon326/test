@@ -17,7 +17,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:4000/api/auth/login', formData);
+            await axios.post('https://test-8-b63b.onrender.com/api/auth/login', formData);
             alert("Login successful");
             navigate('/');
         } catch (error) {

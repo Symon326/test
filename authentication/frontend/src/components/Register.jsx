@@ -18,7 +18,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:4000/api/auth/register', formData);
+            await axios.post('https://test-8-b63b.onrender.com/api/auth/register', formData);
             navigate('/login');
         } catch (error) {
             console.error('Error registering user', error);
